@@ -1,0 +1,83 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Material Schema",
+    "type": "object",
+    "definitions": {
+        "material_id": {
+            "type": "string",
+            "description": "Material ID format",
+            "pattern": "^m#[a-z0-9_]+$",
+            "examples": [
+                "m#rice",
+                "m#sichuan_pepper"
+            ]
+        },
+        "unit_type": {
+            "type": "string",
+            "enum": [
+                "weight",
+                "volume",
+                "count",
+                "length",
+                "area"
+            ],
+            "description": "Supported measurement types"
+        }
+    },
+    "properties": {
+        "id": {
+            "$ref": "#/definitions/material_id",
+            "description": "The ID of material"
+        },
+        "extend": {
+            "$ref": "#/definitions/material_id",
+            "description": "The parent material to extend"
+        },
+        "category": {
+            "type": "string",
+            "enum": [
+                "vegetable",
+                "fruit",
+                "meat",
+                "fat",
+                "seafood",
+                "grain",
+                "dairy",
+                "condiment",
+                "nut_seed",
+                "herb_spice",
+                "processed",
+                "baking",
+                "beverage",
+                "other"
+            ],
+            "description": "Main ingredient category",
+            "examples": [
+                "vegetable",
+                "meat"
+            ]
+        },
+        "unitType": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/unit_type"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/unit_type"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "description": "List of allowed measurement types"
+                }
+            ],
+            "description": "Measurement type(s) for this material (e.g., 'weight', ['volume','count'])"
+        }
+    },
+    "required": [
+        "id",
+        "category",
+        "unitType"
+    ]
+}
