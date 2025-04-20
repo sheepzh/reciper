@@ -1,9 +1,5 @@
 # Reciper
 
-A universal Schema for cooking recipes.
-
-## Overview
-
 Reciper is an open-standard schema for describing cooking recipes in a structured, machine-readable format.
 
 ## Features
