@@ -1,4 +1,4 @@
-# SOR - Schema of Recipe
+# Recipe Code
 
 A universal Schema for cooking recipes.
 
