@@ -1,10 +1,10 @@
-# Recipe Code
+# Reciper
 
 A universal Schema for cooking recipes.
 
 ## Overview
 
-Recipe Code is an open-standard schema for describing cooking recipes in a structured, machine-readable format.
+Reciper is an open-standard schema for describing cooking recipes in a structured, machine-readable format.
 
 ## Features
 
