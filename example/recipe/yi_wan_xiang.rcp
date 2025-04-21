@@ -1,8 +1,9 @@
 id: r#yi_wan_xiang
 kitchenware: k#pot
 preprocess:
-    - slice: m#pork_lean 125g
-    - slice: m#pork_fat 125g
+    - slice:
+          - m#pork_lean 125g
+          - m#pork_fat 125g
     - ring_cut:
           - m#green_pepper 3
           - m#birds_eye_chili 1

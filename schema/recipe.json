@@ -32,6 +32,24 @@
                     "default": 1
                 }
             }
+        },
+        "material_quantity": {
+            "type": "string",
+            "pattern": "^m#\\w+(\\s\\d+(g|kg)?)?$"
+        },
+        "preprocess_object": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/material_quantity"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/material_quantity"
+                    },
+                    "minItems": 1
+                }
+            ]
         }
     },
     "properties": {
@@ -68,6 +86,78 @@
                     "description": "The list of kitchenware"
                 }
             ]
+        },
+        "preprocess": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "slice": {
+                                "$ref": "#/definitions/preprocess_object"
+                            }
+                        },
+                        "required": [
+                            "slice"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "ring_cut": {
+                                "$ref": "#/definitions/preprocess_object"
+                            }
+                        },
+                        "required": [
+                            "ring_cut"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "mince": {
+                                "$ref": "#/definitions/preprocess_object"
+                            }
+                        },
+                        "required": [
+                            "mince"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "julienne": {
+                                "$ref": "#/definitions/preprocess_object"
+                            }
+                        },
+                        "required": [
+                            "julienne"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "mix": {
+                                "$ref": "#/definitions/preprocess_object"
+                            },
+                            "till": {
+                                "type": "string",
+                                "enum": [
+                                    "smooth"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "mix"
+                        ]
+                    }
+                ]
+            }
         }
     },
     "required": [
