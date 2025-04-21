@@ -1,0 +1,45 @@
+id: r#yi_wan_xiang
+kitchenware: k#pot
+preprocess:
+    - slice: m#pork_lean 125g
+    - slice: m#pork_fat 125g
+    - ring_cut:
+          - m#green_pepper 3
+          - m#birds_eye_chili 1
+    - mince: m#garlic 2
+    - julienne: m#ginger 2
+    - mix: m#chicken_egg 2
+      till: smooth
+steps:
+    - fire: low
+    - add: m#cooking_oil
+    - heat:
+      till: 70%
+    - add: m#chicken_egg@mixed
+    - fry:
+      till: m#chicken_egg=cooked
+    - take: m#chicken_egg
+    - add: m#cooking_oil
+    - heat:
+      till: 70%
+    - add: m#pork_fat
+    - dry_fry:
+      till: m#pork_fat=color_golden
+    - fire: medium
+    - add: m#pork_lean
+    - fry:
+      till: m#pork_lean=color_changed
+    - add:
+          - m#ginger@julienned
+          - m#garlic@minced
+          - m#pixian_doubanjiang
+    - fry:
+      till: m#pork_lean=color_red
+    - add:
+          - m#green_pepper
+          - m#birds_eye_chili
+          - m#chicken_egg=cooked
+          - m#soy_sauce 15ml
+          - m#granulated_sugar 5g
+    - fry:
+      till: m#green_pepper=cooked

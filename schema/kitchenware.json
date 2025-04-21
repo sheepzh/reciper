@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Kitchenware Schema",
+    "type": "object",
+    "definitions": {
+        "kitchenware_id": {
+            "type": "string",
+            "description": "Kitchenware ID format",
+            "pattern": "^k#[a-z0-9_]+$",
+            "examples": [
+                "k#pot"
+            ]
+        }
+    },
+    "properties": {
+        "id": {
+            "$ref": "#/definitions/kitchenware_id",
+            "description": "The ID of kitchenware"
+        },
+        "extend": {
+            "$ref": "#/definitions/kitchenware_id",
+            "description": "The parent ID of kitchenware"
+        }
+    },
+    "required": [
+        "id"
+    ]
+}

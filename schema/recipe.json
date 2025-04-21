@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Recipe Schema",
+    "description": "The schema of recipe for Reciper",
+    "type": "object",
+    "definitions": {
+        "recipe_id": {
+            "type": "string",
+            "description": "Recipe ID format",
+            "pattern": "^r#[a-z0-9_]+$",
+            "examples": [
+                "r#rice"
+            ]
+        },
+        "capacity": {
+            "type": "string",
+            "pattern": "^[0-9]+(l|ml|g|mg|kg)$",
+            "description": "The capacity of kitchenware"
+        },
+        "kitchenware": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "./kitchenware.json#/definitions/kitchenware_id"
+                },
+                "capacity": {
+                    "$ref": "#/definitions/capacity"
+                },
+                "quantity": {
+                    "type": "number",
+                    "pattern": "^[0-9]+$",
+                    "default": 1
+                }
+            }
+        }
+    },
+    "properties": {
+        "id": {
+            "$ref": "#/definitions/recipe_id",
+            "description": "The ID of recipe"
+        },
+        "extend": {
+            "$ref": "#/definitions/recipe_id",
+            "description": "The parent recipe"
+        },
+        "kitchenware": {
+            "oneOf": [
+                {
+                    "$ref": "./kitchenware.json#/definitions/kitchenware_id",
+                    "description": "The ID of kitchenware"
+                },
+                {
+                    "$ref": "#/definitions/kitchenware"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "oneOf": [
+                            {
+                                "$ref": "./kitchenware.json#/definitions/kitchenware_id"
+                            },
+                            {
+                                "$ref": "#/definitions/kitchenware"
+                            }
+                        ]
+                    },
+                    "minItems": 1,
+                    "description": "The list of kitchenware"
+                }
+            ]
+        }
+    },
+    "required": [
+        "id",
+        "kitchenware"
+    ]
+}

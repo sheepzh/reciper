@@ -1,16 +1,13 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Material Schema",
+    "description": "The schema of material for Reciper",
     "type": "object",
     "definitions": {
         "material_id": {
             "type": "string",
             "description": "Material ID format",
-            "pattern": "^m#[a-z0-9_]+$",
-            "examples": [
-                "m#rice",
-                "m#sichuan_pepper"
-            ]
+            "pattern": "^m#[a-z0-9_]+$"
         },
         "unit_type": {
             "type": "string",
@@ -27,7 +24,10 @@
     "properties": {
         "id": {
             "$ref": "#/definitions/material_id",
-            "description": "The ID of material"
+            "description": "The ID of material",
+            "examples": [
+                "m#rice"
+            ]
         },
         "extend": {
             "$ref": "#/definitions/material_id",

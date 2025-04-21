@@ -1,5 +1,32 @@
 {
     "yaml.schemas": {
-        "./schema/material.json": "/builtin/material/**/*.yaml"
-    }
+        "./schema/material.json": "/example/material/**/*.rcp",
+        "./schema/kitchenware.json": "/example/kitchenware/**/*.rcp",
+        "./schema/recipe.json": "/example/recipe/**/*.rcp",
+    },
+    "yaml.format.enable": true,
+    "files.associations": {
+        "*.rcp": "yaml"
+    },
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.autoIndent": "keep",
+        "editor.defaultFormatter": "redhat.vscode-yaml",
+    },
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.indentSize": "tabSize",
+        "editor.tabSize": 4,
+        "editor.suggest.insertMode": "replace"
+    },
+    "cSpell.words": [
+        "doubanjiang",
+        "julienned",
+        "pixian",
+        "Reciper",
+        "xiang"
+    ]
 }
