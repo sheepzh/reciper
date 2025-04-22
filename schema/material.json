@@ -19,6 +19,16 @@
                 "area"
             ],
             "description": "Supported measurement types"
+        },
+        "preprocessEnums": {
+            "type": "string",
+            "enum": [
+                "slice",
+                "ring_cut",
+                "mince",
+                "julienne",
+                "mix"
+            ]
         }
     },
     "properties": {
@@ -73,6 +83,19 @@
                 }
             ],
             "description": "Measurement type(s) for this material (e.g., 'weight', ['volume','count'])"
+        },
+        "preprocess": {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/preprocessEnums"
+                },
+                {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/preprocessEnums"
+                    }
+                }
+            ]
         }
     },
     "anyOf": [
@@ -95,5 +118,6 @@
     ],
     "required": [
         "id"
-    ]
+    ],
+    "additionalProperties": false
 }

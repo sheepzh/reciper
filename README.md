@@ -1,10 +1,6 @@
-# SOR - Schema of Recipe
+# Reciper
 
-A universal Schema for cooking recipes.
-
-## Overview
-
-SOR is an open-standard schema for describing cooking recipes in a structured, machine-readable format.
+Reciper is an open-standard schema for describing cooking recipes in a structured, machine-readable format.
 
 ## Features
 
@@ -16,49 +12,71 @@ SOR is an open-standard schema for describing cooking recipes in a structured, m
 
 * Step-by-step instructions with timing and equipment requirements
 
-## Basic Structure
-
-### Kitchenware
+## Examples
 
 ### Material
 
 ```yaml
-id: cooking_oil
-cate: material
-name: Blanched Choy Sum
-measurement: weight volume
-```
-
-```yaml
-id: garlic
-cate: vegetable
-name: Garlic
-procedure:
-    - mince
+id: m#green_pepper
+category: vegetable
+unitType: weight
+preprocess: ring_cut
 ```
 
 ### Recipe
 
 ```yaml
-id: blanched_choy_sum
-name: Blanched Choy Sum
-desc: foobar
-kitchenware:
-    - use: k#pot
-materials:
-    - use: m#choy_sum 250g
-    - use: m#cooking_oil
-pre:
-    - cut: m#choy_sum
-      remark:
-        remove: old parts
-    - mince: m#garlic
-    - mix: 
-      with:
-        
+id: r#yi_wan_xiang
+kitchenware: k#pot
+preprocess:
+    - slice:
+          - m#pork_lean 125g
+          - m#pork_fat 125g
+    - ring_cut:
+          - m#green_pepper 3
+          - m#birds_eye_chili 1
+    - mince: m#garlic 2
+    - julienne: m#ginger 2
+    - mix: m#chicken_egg 2
+      till: smooth
 steps:
-    
+    - fire: low
+    - add: m#cooking_oil
+    - heat:
+      till: 70%
+    - add: m#chicken_egg@mixed
+    - fry:
+      till: m#chicken_egg=cooked
+    - take: m#chicken_egg
+    - add: m#cooking_oil
+    - heat:
+      till: 70%
+    - add: m#pork_fat
+    - dry_fry:
+      till: m#pork_fat=color_golden
+    - fire: medium
+    - add: m#pork_lean
+    - fry:
+      till: m#pork_lean=color_changed
+    - add:
+          - m#ginger@julienned
+          - m#garlic@minced
+          - m#pixian_doubanjiang
+    - fry:
+      till: m#pork_lean=color_red
+    - add:
+          - m#green_pepper
+          - m#birds_eye_chili
+          - m#chicken_egg=cooked
+          - m#soy_sauce 15ml
+          - m#granulated_sugar 5g
+    - fry:
+      till: m#green_pepper=cooked
 ```
+
+### Kitchenware
+
+> TODO
 
 ## Roadmap
 

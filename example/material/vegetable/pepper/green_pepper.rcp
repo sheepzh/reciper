@@ -1,3 +1,4 @@
 id: m#green_pepper
 category: vegetable
 unitType: weight
+preprocess: ring_cut
