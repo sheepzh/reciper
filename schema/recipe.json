@@ -27,15 +27,40 @@
                     "$ref": "#/definitions/capacity"
                 },
                 "quantity": {
-                    "type": "number",
-                    "pattern": "^[0-9]+$",
+                    "type": "integer",
+                    "minimum": 1,
                     "default": 1
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "material_quantity": {
             "type": "string",
-            "pattern": "^m#\\w+(\\s\\d+(g|kg)?)?$"
+            "pattern": "^m#\\w+(\\s\\d+(g|kg)?)?$",
+            "examples": [
+                "m#rice 10g",
+                "m#egg 2",
+                "#water_boiled 10ml",
+                "#pork"
+            ]
+        },
+        "material_to_add": {
+            "type": "string",
+            "pattern": "^m#[a-z0-9_]+(?:@[a-z_]+)?(?:=[a-z_]+)?(?:\\s+\\d+(?:ml|l|kg|g|mg)?)?$",
+            "examples": [
+                "m#rice",
+                "m#rice=cooked 10g",
+                "m#beef@sliced 100g",
+                "m#beef@sliced=cooked"
+            ]
+        },
+        "material_state": {
+            "type": "string",
+            "pattern": "^m#[a-z0-9_]+(?:@[a-z_]+)?(?:=[a-z_]+)$"
+        },
+        "material_for_step": {
+            "type": "string",
+            "pattern": "^m#[a-z0-9_]+(?:@[a-z_]+)?(?:=[a-z_]+)?$"
         },
         "preprocess_object": {
             "oneOf": [
@@ -50,6 +75,10 @@
                     "minItems": 1
                 }
             ]
+        },
+        "duration": {
+            "type": "string",
+            "pattern": "^\\d+(sec|min|hr)$"
         }
     },
     "properties": {
@@ -154,7 +183,170 @@
                         },
                         "required": [
                             "mix"
+                        ],
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "steps": {
+            "type": "array",
+            "items": {
+                "oneOf": [
+                    {
+                        "type": "string",
+                        "enum": [
+                            "boil"
                         ]
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "fire": {
+                                "type": "string",
+                                "enum": [
+                                    "low",
+                                    "medium",
+                                    "high"
+                                ]
+                            }
+                        },
+                        "required": [
+                            "fire"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "add": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/material_to_add"
+                                    },
+                                    {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/material_to_add"
+                                        }
+                                    }
+                                ]
+                            }
+                        },
+                        "required": [
+                            "add"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "heat": {
+                                "type": "null",
+                                "pattern": "^$"
+                            },
+                            "till": {
+                                "oneOf": [
+                                    {
+                                        "type": "string",
+                                        "pattern": "^\\d+(%)$"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/material_state"
+                                    }
+                                ]
+                            }
+                        },
+                        "required": [
+                            "heat"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "fry": {
+                                "type": "null"
+                            },
+                            "till": {
+                                "$ref": "#/definitions/material_state"
+                            }
+                        },
+                        "required": [
+                            "fry"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "dry_fry": {
+                                "type": "null"
+                            },
+                            "till": {
+                                "$ref": "#/definitions/material_state"
+                            }
+                        },
+                        "required": [
+                            "dry_fry"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "take": {
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/definitions/material_for_step"
+                                    },
+                                    {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/definitions/material_for_step"
+                                        },
+                                        "uniqueItems": true
+                                    }
+                                ]
+                            }
+                        },
+                        "required": [
+                            "take"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "blanch": {
+                                "type": "null"
+                            },
+                            "for": {
+                                "$ref": "#/definitions/duration"
+                            }
+                        },
+                        "required": [
+                            "blanch"
+                        ],
+                        "additionalProperties": false
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "braise": {
+                                "type": "null"
+                            },
+                            "for": {
+                                "$ref": "#/definitions/duration"
+                            },
+                            "till": {
+                                "$ref": "#/definitions/material_state"
+                            }
+                        },
+                        "required": [
+                            "braise"
+                        ],
+                        "additionalProperties": false
                     }
                 ]
             }
@@ -162,6 +354,8 @@
     },
     "required": [
         "id",
-        "kitchenware"
-    ]
+        "kitchenware",
+        "steps"
+    ],
+    "additionalProperties": false
 }
