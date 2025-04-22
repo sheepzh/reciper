@@ -75,9 +75,25 @@
             "description": "Measurement type(s) for this material (e.g., 'weight', ['volume','count'])"
         }
     },
+    "anyOf": [
+        {
+            "required": [
+                "extend"
+            ],
+            "properties": {
+                "extend": {
+                    "$ref": "#/definitions/material_id"
+                }
+            }
+        },
+        {
+            "required": [
+                "category",
+                "unitType"
+            ]
+        }
+    ],
     "required": [
-        "id",
-        "category",
-        "unitType"
+        "id"
     ]
 }
