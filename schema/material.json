@@ -39,6 +39,9 @@
                 "m#rice"
             ]
         },
+        "version": {
+            "$ref": "./meta.json#/definitions/version"
+        },
         "extend": {
             "$ref": "#/definitions/material_id",
             "description": "The parent material to extend"

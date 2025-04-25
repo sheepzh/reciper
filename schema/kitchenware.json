@@ -17,6 +17,9 @@
             "$ref": "#/definitions/kitchenware_id",
             "description": "The ID of kitchenware"
         },
+        "version": {
+            "$ref": "./meta.json#/definitions/version"
+        },
         "extend": {
             "$ref": "#/definitions/kitchenware_id",
             "description": "The parent ID of kitchenware"

@@ -1,0 +1,21 @@
+{
+  "name": "reciper-markdown-generator",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@swc/cli": "^0.7.3",
+    "@swc/core": "^1.11.21",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.14.1",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}

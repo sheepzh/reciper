@@ -31,8 +31,7 @@
                     "minimum": 1,
                     "default": 1
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "material_quantity": {
             "type": "string",
@@ -86,6 +85,9 @@
             "$ref": "#/definitions/recipe_id",
             "description": "The ID of recipe"
         },
+        "version": {
+            "$ref": "./meta.json#/definitions/version"
+        },
         "extend": {
             "$ref": "#/definitions/recipe_id",
             "description": "The parent recipe"
@@ -129,8 +131,7 @@
                         },
                         "required": [
                             "slice"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -141,8 +142,7 @@
                         },
                         "required": [
                             "ring_cut"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -153,8 +153,7 @@
                         },
                         "required": [
                             "mince"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -165,8 +164,7 @@
                         },
                         "required": [
                             "julienne"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -183,8 +181,7 @@
                         },
                         "required": [
                             "mix"
-                        ],
-                        "additionalProperties": false
+                        ]
                     }
                 ]
             }
@@ -213,8 +210,7 @@
                         },
                         "required": [
                             "fire"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -235,8 +231,7 @@
                         },
                         "required": [
                             "add"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -259,8 +254,7 @@
                         },
                         "required": [
                             "heat"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -274,8 +268,7 @@
                         },
                         "required": [
                             "fry"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -289,8 +282,7 @@
                         },
                         "required": [
                             "dry_fry"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -312,8 +304,7 @@
                         },
                         "required": [
                             "take"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -327,8 +318,7 @@
                         },
                         "required": [
                             "blanch"
-                        ],
-                        "additionalProperties": false
+                        ]
                     },
                     {
                         "type": "object",
@@ -345,8 +335,7 @@
                         },
                         "required": [
                             "braise"
-                        ],
-                        "additionalProperties": false
+                        ]
                     }
                 ]
             }
@@ -356,6 +345,5 @@
         "id",
         "kitchenware",
         "steps"
-    ],
-    "additionalProperties": false
+    ]
 }
