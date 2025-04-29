@@ -1,4 +1,6 @@
+import { parseKitchenware } from "../common/kitchenware"
 import { parseMaterial } from "../common/material"
+import { parseDuration, parseTill } from "../common/step"
 import type { FormatResult, Translator } from "../i18n/types"
 import type { PreprocessStep, Recipe, Step } from "../types"
 
@@ -34,11 +36,18 @@ const formatMaterials = (t: Translator, stepMaterials: string | string[]): strin
     })
 }
 
+const formatKitchenware = (t: Translator, kitchenwareStr?: string): string | undefined => {
+    const kitchenware = parseKitchenware(kitchenwareStr)
+    if (!kitchenware) return undefined
+    const kitchenwareRes = t.formatKitchenware(kitchenware)
+    return kitchenwareRes ? cvtFormatRes2Mkd(kitchenwareRes) : undefined
+}
+
 const translatePre = (t: Translator, step: PreprocessStep): string => {
-    if ('mix' in step) {
-        const { mix, till } = step
-        const target = formatMaterials(t, mix)
-        return t.preprocess.mix({ target, till })
+    if ('whisk' in step) {
+        const { whisk, till } = step
+        const target = formatMaterials(t, whisk)
+        return t.preprocess.whisk({ target, till })
     } else if ('ring_cut' in step) {
         return t.preprocess.ringCut({ target: formatMaterials(t, step.ring_cut) })
     } else if ('slice' in step) {
@@ -55,6 +64,30 @@ const translatePre = (t: Translator, step: PreprocessStep): string => {
 const translateStep = (t: Translator, step: Step): string => {
     if ('fire' in step) {
         return t.step.fire({ target: step.fire })
+    } else if ('add' in step) {
+        const { add, into } = step
+        const target = formatMaterials(t, add)
+        const kitchenware = formatKitchenware(t, into)
+        return t.step.add({ target, kitchenware })
+    } else if ('heat' in step || 'fry' in step || 'dry_fry' in step) {
+        const { till: tillStr, for: durationStr } = step
+        const till = tillStr ? parseTill(tillStr) : undefined
+        const duration = durationStr ? parseDuration(durationStr) : undefined
+        let fun
+        if ('heat' in step) {
+            fun = t.step.heat
+        } else if ('fry' in step) {
+            fun = t.step.fry
+        } else if ('dry_fry' in step) {
+            fun = t.step.dry_fry
+        } else {
+            throw new Error("Unsupported step: " + JSON.stringify(step))
+        }
+        return fun({ till, duration })
+    } else if ('take' in step) {
+        const { take } = step
+        const target = formatMaterials(t, take)
+        return t.step.take({ target })
     } else {
         throw new Error("Unsupported step: " + JSON.stringify(step))
     }

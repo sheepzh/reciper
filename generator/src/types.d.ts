@@ -4,7 +4,7 @@ export type MixState = 'smooth'
 
 export type PreprocessStep =
     | {
-        mix: string | string[]
+        whisk: string | string[]
         till?: MixState
     }
     | {
@@ -33,7 +33,7 @@ export type Locale = 'zh_CN' | 'en'
 
 export type Step =
     | { fire: FireState }
-    | { add: Materials }
+    | { add: Materials, into?: string }
     | { take: Materials }
     | CookingStep
 
@@ -42,3 +42,10 @@ export type Recipe = {
     preprocess?: PreprocessStep[]
     steps: Step[]
 }
+
+/**
+ * Make one field optional
+ */
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [P in K]?: T[P] }
+
+export type MakeRequired<T, K extends keyof T> = Omit<T, K> & Required<{ [P in K]: T[P] }>

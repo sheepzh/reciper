@@ -1,5 +1,5 @@
 import { validateProcessedState, type ProcessedState } from "./preprocess"
-import { validateCookedState, type CookedState } from "./step"
+import { type CookedTarget, validateCookedTarget } from "./step"
 
 const ALL_UNITS = ['ml', 'l', 'kg', 'g', 'mg'] as const
 type Unit = typeof ALL_UNITS[number]
@@ -20,11 +20,11 @@ export type Quantity = {
 export type MaterialParsed = {
     id: string
     processed?: ProcessedState
-    cooked?: CookedState
+    cooked?: CookedTarget
     quantity?: Quantity
 }
 
-const MATERIAL_PATTERN = /^m#(?<id>[a-z0-9_]+)(@(?<pState>[a-z_]+))?(=(?<cState>[a-z_]+))?(\s+(?<quantity>\d+)(?<unit>ml|l|kg|g|mg)?)$/
+const MATERIAL_PATTERN = /^m#(?<id>[a-z0-9_]+)(@(?<pState>[a-z_]+))?(=(?<cState>[a-z_]+))?(\s+(?<quantity>\d+)(?<unit>ml|l|kg|g|mg)?)?$/
 type MaterialPatternGroup = {
     id: string
     pState?: string
@@ -42,7 +42,7 @@ export const parseMaterial = (str: string): MaterialParsed => {
     return {
         id,
         processed: validateProcessedState(pState),
-        cooked: validateCookedState(cState),
+        cooked: validateCookedTarget(cState),
         quantity: quantity ? { count: parseInt(quantity), unit: validateUnit(unit) } : undefined
     }
 }

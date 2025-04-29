@@ -1,4 +1,4 @@
-export const PROCESSED_STATES = ['sliced', 'ring_cut', 'minced', 'julienned'] as const
+export const PROCESSED_STATES = ['sliced', 'ring_cut', 'minced', 'julienned', 'whisked'] as const
 
 export type ProcessedState = typeof PROCESSED_STATES[number]
 

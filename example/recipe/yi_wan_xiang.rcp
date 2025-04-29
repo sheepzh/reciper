@@ -9,14 +9,14 @@ preprocess:
           - m#birds_eye_chili 1
     - mince: m#garlic 2
     - julienne: m#ginger 2
-    - mix: m#chicken_egg 2
+    - whisk: m#chicken_egg 2
       till: smooth
 steps:
     - fire: low
     - add: m#cooking_oil
     - heat:
       till: 70%
-    - add: m#chicken_egg@mixed
+    - add: m#chicken_egg@whisked
     - fry:
       till: m#chicken_egg=cooked
     - take: m#chicken_egg

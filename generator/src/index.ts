@@ -11,7 +11,7 @@ function main() {
     const yaml = loadYaml(content) as Recipe
     const generator = new MarkdownGenerator()
     const t = getTranslator('en')
-    const markdown = generator.generateMarkdown(yaml, t)
+    const markdown = generator.generateMarkdown(yaml, t, { orderNo: true })
     console.log(markdown)
 }
 

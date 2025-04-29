@@ -169,7 +169,7 @@
                     {
                         "type": "object",
                         "properties": {
-                            "mix": {
+                            "whisk": {
                                 "$ref": "#/definitions/preprocess_object"
                             },
                             "till": {
@@ -180,7 +180,7 @@
                             }
                         },
                         "required": [
-                            "mix"
+                            "whisk"
                         ]
                     }
                 ]
@@ -227,6 +227,9 @@
                                         }
                                     }
                                 ]
+                            },
+                            "into": {
+                                "$ref": "./kitchenware.json#/definitions/kitchenware_id"
                             }
                         },
                         "required": [
